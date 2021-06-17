@@ -25,7 +25,7 @@ public class FLN{
 	}
 	
 	
-	// this function is needed to print the show the object in own way
+	// this function is needed to show the object details in own way
 	
 	public String toString()
 	{
