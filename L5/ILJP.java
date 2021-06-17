@@ -1,5 +1,7 @@
 public class ILJP {
 	
+	// function to pause the execution for a few miliseconds
+	
 	public static void waitABit(int ms)
 	{
 		try
@@ -11,6 +13,10 @@ public class ILJP {
 		    Thread.currentThread().interrupt();
 		}
 	}
+	
+	
+	// function to print the string char by char, with a short pause
+	// if there will be any space chars, the program will change the delay time
 	
 	public static void fasterEachWord(String s)
 	{
@@ -30,6 +36,9 @@ public class ILJP {
 			waitABit(pause);
 		}
 	}
+
+
+	// main function, test with any sentences
 
 	public static void main(String[] args) {
 	
