@@ -33,20 +33,25 @@ public class FLN{
 	
 	public String toString()
 	{
-		return "prenume : " + this.firstName + "\n" +
-				"nume : " + this.lastName;
+		return "Generam nume" + "\n" +
+				"-------------------" + "\n" +
+				"prenume : " + this.firstName + "\n" +
+				"nume : " + this.lastName + "\n";
 	}
 	
 	
 	// unknown object array size, use arraylist
 	// read from file, insert in array
-	// print one random name
+	// print a random name until we get an answer different from da
 	
 	public static void main(String[] args)
 	{
+		Random rand = new Random();
+		Scanner sc= new Scanner(System.in);
+		
 		ArrayList<FLN> fln = new ArrayList<FLN>();
 		int rn, size = 0;
-		Random rand = new Random();
+		String option;
 		
 		try ( BufferedReader br = new BufferedReader(new FileReader("a.txt")) ) {
 			String st, fn, ln;
@@ -63,7 +68,12 @@ public class FLN{
 			}
 		} catch(IOException e) { System.out.println("I/O Error: " + e); }
 		
-		rn = rand.nextInt(size);
-		System.out.println(fln.get(rn));
+		do{
+			System.out.println();
+			rn = rand.nextInt(size);
+			System.out.println(fln.get(rn));
+			System.out.println("Inca o data ? (da/nu)");
+			option = sc.nextLine();
+		} while (option.equals("da"));
 	}
 }
