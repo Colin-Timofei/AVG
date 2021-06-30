@@ -97,7 +97,7 @@ public class Main {
                 System.out.println("Toate numerele impare piina la " + n + " sunt :");
                 System.out.println(uneven.get(n));
             }
-            else System.out.println("Numarul este acceptabil");
+            else System.out.println("Numarul nu este acceptabil");
         } catch(Exception e) {
             System.out.println(errMsg1());
         }
