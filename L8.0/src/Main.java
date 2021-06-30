@@ -178,7 +178,7 @@ public class Main {
             System.out.println(s);
     }
 
-    public static void waitAbit(int ms) {
+    public static int waitAbit(int ms) {
 
         System.out.println();
 
@@ -190,6 +190,8 @@ public class Main {
         {
             Thread.currentThread().interrupt();
         }
+
+        return 0;
     }
 
     public static void defMsg(String s1, String s2){
