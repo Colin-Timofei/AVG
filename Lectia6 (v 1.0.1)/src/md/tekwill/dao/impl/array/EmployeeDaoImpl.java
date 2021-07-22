@@ -7,7 +7,7 @@ import md.tekwill.generator.array.ArrayGenerator;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
-    private final static int maxEmployees = 7;
+    private final static int maxEmployees = 50;
     private static Employee[] employees = new Employee[maxEmployees];
 
     static {

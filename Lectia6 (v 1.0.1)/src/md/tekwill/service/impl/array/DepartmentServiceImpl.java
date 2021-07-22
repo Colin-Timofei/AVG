@@ -69,4 +69,17 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         return result;
     }
+
+    public String[] getDepartmentNames() {
+
+        int size = departmentDao.findFirstEmptyPosition() == -1 ? departmentDao.getMaxElements() : departmentDao.findFirstEmptyPosition();
+        String[] result = new String[size];
+        Department[] temp = departmentDao.getDepartments();
+
+        for(int i = 0; i < size; i++) {
+            result[i] = temp[i].getName();
+        }
+
+        return result;
+    }
 }
