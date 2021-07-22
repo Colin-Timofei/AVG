@@ -1,130 +1,70 @@
 package md.tekwill.main;
 
-// Java program to illustrate the GridLayout
 import javax.swing.*;
 import java.awt.*;
 
-// class GridLayout extends JFrame
+
 public class Test extends JFrame {
 
     Test() {
 
-        // Creating Object P1 of JPanel class
-        JPanel p1 = new JPanel();
+        JFrame jfrm = new JFrame();
+        jfrm.setSize(400, 400);
+        jfrm.setResizable(false);
+        jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // set the layout
-        p1.setLayout(new GridLayout(4, 2));
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
-        // Creating Object of "FlowLayout" class
-        FlowLayout layout = new FlowLayout();
+        tabbedPane.addTab("One", makePanel());
+        tabbedPane.addTab("Two", makePanel());
 
-        // Creating Object P2 of JPanel class
-        JPanel p2 = new JPanel();
-
-        // set the layout
-        p2.setLayout(layout);
-
-        // Declaration of objects of JLabel class.
-        JLabel one, two, three, four;
-
-        // Declaration of objects of JTextField class.
-        JTextField tname, tsalary, tcode, tdesig;
-
-        // Declaration of objects of JButton class.
-        JButton buttonSave, buttonExit;
-
-        // Initialization of object
-        // "one" of JLabel class.
-        one = new JLabel("NAME");
-
-        // Initialization of object
-        // "tname" of JTextField class.
-        tname = new JTextField(20);
-
-        // Initialization of object
-        // "two" of JLabel class.
-        two = new JLabel("CODE");
-
-        // Initialization of object
-        // "tcode" of JTextField class.
-        tcode = new JTextField(20);
-
-        // Initialization of object
-        // "three" of JLabel class.
-        three = new JLabel("DESIGNATION");
-
-        // Initialization of object
-        // "tdesig" of JTextField class.
-        tdesig = new JTextField(20);
-
-        // Initialization of object
-        // "four" of JLabel class.
-        four = new JLabel("SALARY");
-
-        // Initialization of object
-        // "tsalary" of JTextField class.
-        tsalary = new JTextField(20);
-
-        // Initialization of object
-        // "buttonsave" of JButton class.
-        buttonSave = new JButton("SAVE");
-
-        // Initialization of object
-        // "buttonexit" of JButton class.
-        buttonExit = new JButton("EXIT");
-
-        // Adding Jlabel "one" on JFrame.
-        p1.add(one);
-
-        // Adding JTextField "tname" on JFrame.
-        p1.add(tname);
-
-        // Adding Jlabel "two" on JFrame.
-        p1.add(two);
-
-        // Adding JTextField "tcode" on JFrame.
-        p1.add(tcode);
-
-        // Adding Jlabel "three" on JFrame.
-        p1.add(three);
-
-        // Adding JTextField "tdesig" on JFrame.
-        p1.add(tdesig);
-
-        // Adding Jlabel "four" on JFrame.
-        p1.add(four);
-
-        // Adding JTextField "tsalary" on JFrame.
-        p1.add(tsalary);
-
-        // Adding JButton "buttonsave" on JFrame.
-        p2.add(buttonSave);
-
-        // Adding JButton "buttonexit" on JFrame.
-        p2.add(buttonExit);
-
-        // add the p1 object which
-        // refer to the Jpanel
-        add(p1, "North");
-
-        // add the p2 object which
-        // refer to the Jpanel
-        add(p2, "South");
-
-        // Function to set visible
-        // status of JFrame.
-        setVisible(true);
-
-        // this Keyword refers to current
-        // object. Function to set size of JFrame.
-        this.setSize(400, 180);
+        jfrm.add(tabbedPane);
+        jfrm.setVisible(true);
     }
 
-    // Main Method
+    private JPanel makePanel() {
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+
+        Box box1 = new Box(BoxLayout.X_AXIS);
+        box1.setPreferredSize(new Dimension(400, 300));
+
+        String[][] data = new String[][] {
+                {"A", "123", "Tesla"},
+                {"B", "312", "Tesla"},
+                {"C", "441", "Tesla"},
+                {"A", "123", "Tesla"},
+                {"B", "312", "Tesla"},
+                {"C", "441", "Tesla"},
+                {"A", "123", "Tesla"},
+                {"B", "312", "Tesla"},
+                {"C", "441", "Tesla"},
+                {"A", "123", "Tesla"},
+                {"B", "312", "Tesla"},
+                {"C", "441", "Tesla"}
+        };
+
+        String[] columns = {"letter", "number", "car"};
+
+        JTable table = new JTable(data, columns);
+        table.setRowHeight(25);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        box1.add(scrollPane);
+
+        panel.add(box1);
+
+        Box box2 = new Box(BoxLayout.X_AXIS);
+        box2.setPreferredSize(new Dimension(400,100));
+        box2.add(new JButton("Do"));
+        panel.add(box2);
+
+        return panel;
+    }
+
     public static void main(String args[])
     {
-
-        // calling the constructor
         new Test();
     }
 }

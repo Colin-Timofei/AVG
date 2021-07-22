@@ -6,7 +6,7 @@ import md.tekwill.generator.array.ArrayGenerator;
 
 public class DepartmentDaoImpl implements DepartmentDao {
 
-    private final static int maxDepartments = 10;
+    private final static int maxDepartments = 15;
     private static Department[] departments = new Department[maxDepartments];
 
     static {
