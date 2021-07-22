@@ -4,6 +4,7 @@ import md.tekwill.domain.Department;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.*;
 
 import static md.tekwill.main.SwingMain.*;
@@ -16,17 +17,17 @@ public class DepartmentPanel {
     static DefaultTableModel model = new DefaultTableModel(dsi.getAll(), columns);
     static JTable departmentTable = new JTable(model);
     static MouseAdapter departmentTableListener = tableClick();
-    static JButton departmentCreateButton = makeButton("Create New Department", newDepartmentListener(), 200, 30);
+    static JButton departmentCreateButton = makeButton("Create New Department", newDepartmentListener(), new Dimension(200,30));
 
     public static JPanel makeDepartmentPanel() {
 
         setBoxPanel(departmentPanel);
 
-        Box box1 = makeBox(400, 300);
+        Box box1 = makeBox(firstBoxDimension);
         JScrollPane scrollPane = makeScrollPaneFromTableWithListener(departmentTable, departmentTableListener, new int[] {100, 200});
         box1.add(scrollPane);
 
-        Box box2 = makeBox(400, 100);
+        Box box2 = makeBox(secondBoxDimension);
         box2.add(departmentCreateButton);
 
         departmentPanel.add(box1);
@@ -101,13 +102,13 @@ public class DepartmentPanel {
             JDialog dialog = createDepartmentDialog("Create Department");
             JPanel panel = createDialogPanel();
 
-            JLabel nameLabel = makeLabel("Enter the name of the new department : ", 250, 25);
-            JLabel errorLabel = makeLabel("", 250, 25);
+            JLabel nameLabel = makeLabel("Enter the name of the new department : ", bigDimension);
+            JLabel errorLabel = makeLabel("", bigDimension);
 
-            JTextField nameField = makeTextField("", 250, 25, true);
+            JTextField nameField = makeTextField("", bigDimension, true);
 
-            JButton cancel = makeDialogCancelButton(cancelButtonListener(dialog), 100, 25);
-            JButton submit = makeDialogCreateButton(createButtonListener(nameField, errorLabel), 100, 25);
+            JButton cancel = makeDialogCancelButton(cancelButtonListener(dialog), mediumDimension);
+            JButton submit = makeDialogCreateButton(createButtonListener(nameField, errorLabel), mediumDimension);
 
             panel.add(nameLabel);
             panel.add(nameField);
@@ -129,10 +130,10 @@ public class DepartmentPanel {
 
                     lockPanel();
 
-                    JDialog dialog = createDepartmentDialog("Update or Delete");
+                    JDialog dialog = createDepartmentDialog("Update or Delete Department");
                     JPanel panel = createDialogPanel();
 
-                    JLabel errorLabel = makeLabel("", 250, 25);
+                    JLabel errorLabel = makeLabel("", bigDimension);
 
                     int row = ((JTable) e.getSource()).getSelectedRow();
                     int departmentId = Integer.parseInt(departmentTable.getModel().getValueAt(row, 0).toString());
@@ -140,15 +141,15 @@ public class DepartmentPanel {
 
                     if (Boolean.parseBoolean(getElement[0])) {
 
-                        JTextField numberField = makeTextField(getElement[1], 75, 25, false);
+                        JTextField numberField = makeTextField(getElement[1], mediumDimension, false);
                         panel.add(numberField);
 
-                        JTextField departmentField = makeTextField(getElement[2], 175, 25, true);
+                        JTextField departmentField = makeTextField(getElement[2], mediumDimension, true);
                         panel.add(departmentField);
 
-                        JButton cancel = makeDialogCancelButton(cancelButtonListener(dialog), 75, 25);
-                        JButton delete = makeDialogDeleteButton(deleteButtonListener(dialog, getElement),75, 25);
-                        JButton update = makeDialogUpdateButton(updateButtonListener(departmentField, getElement, errorLabel), 75, 25);
+                        JButton cancel = makeDialogCancelButton(cancelButtonListener(dialog), smallDimension);
+                        JButton delete = makeDialogDeleteButton(deleteButtonListener(dialog, getElement),smallDimension);
+                        JButton update = makeDialogUpdateButton(updateButtonListener(departmentField, getElement, errorLabel), smallDimension);
 
                         panel.add(cancel);
                         panel.add(delete);

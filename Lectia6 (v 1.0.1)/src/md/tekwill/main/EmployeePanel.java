@@ -18,7 +18,7 @@ public class EmployeePanel {
     static DefaultTableModel model = new DefaultTableModel(esi.getAll(), columns);
     static JTable employeeTable = new JTable(model);
     static MouseAdapter employeeTableListener = tableClick();
-    static JButton employeeCreateButton = makeButton("Add New Employee", newEmployeeListener(), 200, 30);
+    static JButton employeeCreateButton = makeButton("Add New Employee", newEmployeeListener(), new Dimension(200, 30));
 
 
     public static JPanel makeEmployeePanel() {
@@ -26,11 +26,11 @@ public class EmployeePanel {
 
         setBoxPanel(employeePanel);
 
-        Box box1 = makeBox(400, 300);
+        Box box1 = makeBox(firstBoxDimension);
         JScrollPane scrollPane = makeScrollPaneFromTableWithListener(employeeTable, employeeTableListener, new int[] {50, 100, 100, 100});
         box1.add(scrollPane);
 
-        Box box2 = makeBox(400, 100);
+        Box box2 = makeBox(secondBoxDimension);
         box2.add(employeeCreateButton);
 
         employeePanel.add(box1);
@@ -111,21 +111,21 @@ public class EmployeePanel {
             JDialog dialog = createEmployeeDialog("Add Employee");
             JPanel panel = createDialogPanel();
 
-            JLabel nameLabel = makeLabel("Enter the details of the new employee : ", 250, 25);
-            JLabel errorLabel = makeLabel("", 250, 25);
+            JLabel nameLabel = makeLabel("Enter the details of the new employee : ", bigDimension);
+            JLabel errorLabel = makeLabel("", bigDimension);
 
-            JLabel firstNameLabel = makeLabel("First Name : ", 100, 25);
-            JTextField firstNameField = makeTextField("", 150, 25, true);
+            JLabel firstNameLabel = makeLabel("First Name : ", mediumDimension);
+            JTextField firstNameField = makeTextField("", mediumPlusDimension, true);
 
-            JLabel lastNameLabel = makeLabel("Last Name : ", 100, 25);
-            JTextField lastNameField = makeTextField("", 150, 25, true);
+            JLabel lastNameLabel = makeLabel("Last Name : ", mediumDimension);
+            JTextField lastNameField = makeTextField("", mediumPlusDimension, true);
 
             String[] departments = dsi.getDepartmentNames();
-            JLabel departmentLabel = makeLabel("Department : ", 100, 25);
+            JLabel departmentLabel = makeLabel("Department : ", mediumDimension);
             JComboBox departmentComboBox = new JComboBox(departments);
 
-            JButton cancel = makeDialogCancelButton(cancelButtonListener(dialog), 100, 25);
-            JButton submit = makeDialogCreateButton(createButtonListener(firstNameField, lastNameField, departmentComboBox, errorLabel), 100, 25);
+            JButton cancel = makeDialogCancelButton(cancelButtonListener(dialog), mediumDimension);
+            JButton submit = makeDialogCreateButton(createButtonListener(firstNameField, lastNameField, departmentComboBox, errorLabel), mediumDimension);
 
             panel.add(nameLabel);
 
@@ -156,10 +156,10 @@ public class EmployeePanel {
 
                     lockPanel();
 
-                    JDialog dialog = createEmployeeDialog("Update or Delete");
+                    JDialog dialog = createEmployeeDialog("Update or Remove Employee");
                     JPanel panel = createDialogPanel();
 
-                    JLabel errorLabel = makeLabel("", 250, 25);
+                    JLabel errorLabel = makeLabel("", bigDimension);
 
                     int row = ((JTable) e.getSource()).getSelectedRow();
                     int employeeId = Integer.parseInt(employeeTable.getModel().getValueAt(row, 0).toString());
@@ -167,31 +167,31 @@ public class EmployeePanel {
 
                     if (Boolean.parseBoolean(getElement[0])) {
 
-                        JLabel idLabel = makeLabel("ID : ", 75, 25);
-                        JTextField idField = makeTextField(getElement[1], 175, 25, false);
+                        JLabel idLabel = makeLabel("ID : ", smallDimension);
+                        JTextField idField = makeTextField(getElement[1], mediumPlusDimension, false);
                         panel.add(idLabel);
                         panel.add(idField);
 
-                        JLabel firstNameLabel = makeLabel("First Name : ", 75, 25);
-                        JTextField firstNameField = makeTextField(getElement[2], 175, 25, true);
+                        JLabel firstNameLabel = makeLabel("First Name : ", smallDimension);
+                        JTextField firstNameField = makeTextField(getElement[2], mediumPlusDimension, true);
                         panel.add(firstNameLabel);
                         panel.add(firstNameField);
 
-                        JLabel lastNameLabel = makeLabel("Last Name : ", 75, 25);
-                        JTextField lastNameField = makeTextField(getElement[3], 175, 25, true);
+                        JLabel lastNameLabel = makeLabel("Last Name : ", smallDimension);
+                        JTextField lastNameField = makeTextField(getElement[3], mediumPlusDimension, true);
                         panel.add(lastNameLabel);
                         panel.add(lastNameField);
 
                         String[] departments = dsi.getDepartmentNames();
-                        JLabel departmentLabel = makeLabel("Department : ", 75, 25);
+                        JLabel departmentLabel = makeLabel("Department : ", smallDimension);
                         JComboBox departmentComboBox = new JComboBox(departments);
-                        departmentComboBox.setPreferredSize(new Dimension(175, 25));
+                        departmentComboBox.setPreferredSize(mediumPlusDimension);
                         panel.add(departmentLabel);
                         panel.add(departmentComboBox);
 
-                        JButton cancel = makeDialogCancelButton(cancelButtonListener(dialog), 75, 25);
-                        JButton delete = makeDialogDeleteButton(deleteButtonListener(dialog, getElement),75, 25);
-                        JButton update = makeDialogUpdateButton(updateButtonListener(firstNameField, lastNameField, departmentComboBox, getElement, errorLabel), 75, 25);
+                        JButton cancel = makeDialogCancelButton(cancelButtonListener(dialog), smallDimension);
+                        JButton delete = makeDialogDeleteButton(deleteButtonListener(dialog, getElement),smallDimension);
+                        JButton update = makeDialogUpdateButton(updateButtonListener(firstNameField, lastNameField, departmentComboBox, getElement, errorLabel), smallDimension);
 
                         panel.add(cancel);
                         panel.add(delete);

@@ -7,8 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import static md.tekwill.main.SwingMain.jfrm;
-import static md.tekwill.main.SwingMain.tabbedPane;
+import static md.tekwill.main.SwingMain.*;
 
 public class Helper {
 
@@ -18,10 +17,10 @@ public class Helper {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
     }
 
-    public static Box makeBox(int width, int height) {
+    public static Box makeBox(Dimension dimension) {
 
         Box tmp = new Box(BoxLayout.X_AXIS);
-        tmp.setPreferredSize(new Dimension(width, height));
+        tmp.setPreferredSize(dimension);
 
         return tmp;
     }
@@ -58,51 +57,51 @@ public class Helper {
         return tmp;
     }
 
-    public static JLabel makeLabel(String label, int width, int height) {
+    public static JLabel makeLabel(String label, Dimension dimension) {
 
         JLabel tmp = new JLabel(label);
-        tmp.setPreferredSize(new Dimension(width, height));
+        tmp.setPreferredSize(dimension);
 
         return tmp;
     }
 
-    public static JTextField makeTextField(String text, int width, int height, boolean isEnabled) {
+    public static JTextField makeTextField(String text, Dimension dimension, boolean isEnabled) {
 
         JTextField tmp = new JTextField();
-        tmp.setPreferredSize(new Dimension(width, height));
+        tmp.setPreferredSize(dimension);
         tmp.setEnabled(isEnabled);
         tmp.setText(text);
 
         return tmp;
     }
 
-    public static JButton makeButton(String name, ActionListener listener, int width, int height) {
+    public static JButton makeButton(String name, ActionListener listener, Dimension dimension) {
 
         JButton tmp = new JButton(name);
-        tmp.setPreferredSize(new Dimension(width, height));
+        tmp.setPreferredSize(dimension);
         tmp.addActionListener(listener);
 
         return tmp;
     }
 
-    public static JButton makeDialogCancelButton(ActionListener listener, int width, int height) {
+    public static JButton makeDialogCancelButton(ActionListener listener, Dimension dimension) {
 
-        return makeButton("Cancel", listener, width, height);
+        return makeButton("Cancel", listener, dimension);
     }
 
-    public static JButton makeDialogCreateButton(ActionListener listener, int width, int height) {
+    public static JButton makeDialogCreateButton(ActionListener listener, Dimension dimension) {
 
-        return makeButton("Create", listener, width, height);
+        return makeButton("Create", listener, dimension);
     }
 
-    public static JButton makeDialogUpdateButton(ActionListener listener, int width, int height) {
+    public static JButton makeDialogUpdateButton(ActionListener listener, Dimension dimension) {
 
-        return makeButton("Update", listener, width, height);
+        return makeButton("Update", listener, dimension);
     }
 
-    public static JButton makeDialogDeleteButton(ActionListener listener, int width, int height) {
+    public static JButton makeDialogDeleteButton(ActionListener listener, Dimension dimension) {
 
-        return makeButton("Delete", listener, width, height);
+        return makeButton("Delete", listener, dimension);
     }
 
     public static WindowAdapter onWindowClose(JTable table, MouseAdapter mouseAdapter, JButton actionButton) {
