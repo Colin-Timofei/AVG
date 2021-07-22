@@ -15,6 +15,7 @@ public class DepartmentPanel {
     static Box box1 = new Box(BoxLayout.X_AXIS);
     static DefaultTableModel model = new DefaultTableModel(SwingMain.dsi.getAll(), new String[]{"ID", "Name"});
     static JTable table = new JTable(model);
+    static MouseAdapter tableListener = rowClickAL();
     static Box box2 = new Box(BoxLayout.X_AXIS);
     static JButton departmentCreate = new JButton("Create New Department");
 
@@ -25,15 +26,15 @@ public class DepartmentPanel {
 
         box1.setPreferredSize(new Dimension(400, 300));
 
+        table.addMouseListener(tableListener);
         table.getColumnModel().getColumn(0).setPreferredWidth(100);
         table.getColumnModel().getColumn(1).setPreferredWidth(200);
         table.setRowHeight(25);
-        rowClickAL();
 
         JScrollPane scrollPane = new JScrollPane(table);
         box1.add(scrollPane);
 
-        box2.setPreferredSize(new Dimension(400,100));
+        box2.setPreferredSize(new Dimension(400, 100));
 
         dptCreateAddAL();
         box2.add(departmentCreate);
@@ -46,11 +47,13 @@ public class DepartmentPanel {
 
     private static void lockDepartmentWindow() {
         tabbedPane.setEnabled(false);
+        table.removeMouseListener(tableListener);
         departmentCreate.setEnabled(false);
     }
 
     private static void unlockDepartmentWindow() {
         tabbedPane.setEnabled(true);
+        table.addMouseListener(tableListener);
         departmentCreate.setEnabled(true);
     }
 
@@ -66,10 +69,8 @@ public class DepartmentPanel {
                 dialog.setSize(new Dimension(300, 300));
                 dialog.setResizable(false);
 
-                dialog.addWindowListener(new WindowAdapter()
-                {
-                    public void windowClosing(WindowEvent e)
-                    {
+                dialog.addWindowListener(new WindowAdapter() {
+                    public void windowClosing(WindowEvent e) {
                         unlockDepartmentWindow();
                     }
                 });
@@ -105,8 +106,10 @@ public class DepartmentPanel {
                         Department newdpt = new Department(dpt);
                         String[] result = dsi.create(newdpt);
                         errorLabel.setText(result[1]);
-                        model.setDataVector(dsi.getAll(), new String[]{"ID", "Name"});
-                        model.fireTableDataChanged();
+
+                        if (Boolean.parseBoolean(result[0])) {
+                            model.setDataVector(dsi.getAll(), new String[]{"ID", "Name"});
+                        }
                     }
                 });
 
@@ -122,8 +125,9 @@ public class DepartmentPanel {
         });
     }
 
-    private static void rowClickAL() {
-        table.addMouseListener(new MouseAdapter() {
+    private static MouseAdapter rowClickAL() {
+
+        MouseAdapter tmp = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (e.getClickCount() == 2) {
@@ -140,10 +144,11 @@ public class DepartmentPanel {
                     JLabel errorLabel = new JLabel();
                     errorLabel.setPreferredSize(new Dimension(250, 25));
 
-                    int row = ((JTable)e.getSource()).getSelectedRow();
-                    String[] getElement = dsi.read(row);
+                    int row = ((JTable) e.getSource()).getSelectedRow();
+                    int departmentId = Integer.parseInt(table.getModel().getValueAt(row, 0).toString());
+                    String[] getElement = dsi.read(departmentId);
 
-                    if(Boolean.parseBoolean(getElement[0])) {
+                    if (Boolean.parseBoolean(getElement[0])) {
 
                         JTextField numberField = new JTextField();
                         numberField.setText(getElement[1]);
@@ -175,9 +180,7 @@ public class DepartmentPanel {
                                 int id = Integer.parseInt(getElement[1]);
                                 String[] result = dsi.delete(id);
 
-                                errorLabel.setText(result[1]);
                                 model.setDataVector(dsi.getAll(), new String[]{"ID", "Name"});
-                                model.fireTableDataChanged();
                                 unlockDepartmentWindow();
                                 dialog.dispose();
                             }
@@ -193,9 +196,10 @@ public class DepartmentPanel {
                                 String updatedDepartment = departmentField.getText();
                                 String[] result = dsi.update(id, new Department(updatedDepartment));
 
+                                System.out.println(result[1]);
+
                                 errorLabel.setText(result[1]);
                                 model.setDataVector(dsi.getAll(), new String[]{"ID", "Name"});
-                                model.fireTableDataChanged();
                             }
                         });
 
@@ -205,20 +209,19 @@ public class DepartmentPanel {
                     }
 
 
-                    dialog.addWindowListener(new WindowAdapter()
-                    {
-                        public void windowClosing(WindowEvent e)
-                        {
+                    dialog.addWindowListener(new WindowAdapter() {
+                        public void windowClosing(WindowEvent e) {
                             unlockDepartmentWindow();
                         }
                     });
 
-                    dialog.add(errorLabel);
+                    panel.add(errorLabel);
                     dialog.add(panel);
                     dialog.setVisible(true);
                 }
             }
-        });
-    }
+        };
 
+        return tmp;
+    }
 }

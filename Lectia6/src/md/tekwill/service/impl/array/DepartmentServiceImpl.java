@@ -12,14 +12,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     public String[] create(Department department) {
 
         if(department.getName().equals("")) {
-            return new String[] {"false", "the new department should have a name !"};
+            return new String[] {"false", "The new department should have a name !"};
         } else if(departmentDao.findFirstEmptyPosition() == -1) {
-            return new String[] {"false", "cannot add more records !"};
+            return new String[] {"false", "Cannot add more records !"};
         } else if (departmentDao.findPositionByName(department.getName()) != -1) {
             return new String[] {"false", department.getName() + " department already exists !"};
         } else {
             departmentDao.create(department);
-            return new String[] {"true", "new record created !"};
+            return new String[] {"true", "New record created !"};
         }
     }
 
@@ -36,14 +36,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     public String[] update(int departmentId, Department updatedDepartment) {
 
         if (updatedDepartment.getName().equals("")) {
-            return new String[] {"false", "the department should have a name !"};
+            return new String[] {"false", "The department should have a name !"};
         } else if(departmentDao.findPositionById(departmentId) == -1) {
-            return new String[] {"false", "cannot find a department with the ID " + departmentId};
+            return new String[] {"false", "Cannot find a department with the ID " + departmentId};
         } else if (departmentDao.findPositionByName(updatedDepartment.getName()) != -1) {
-            return new String[] {"false", "cannot rename this department because a department named " + updatedDepartment.getName() + " already exists !"};
+            return new String[] {"false", "A department named " + updatedDepartment.getName() + " already exists !"};
         } else {
             departmentDao.update(departmentId, updatedDepartment);
-            return new String[] {"true", "department updated !"};
+            return new String[] {"true", "Department updated !"};
         }
     }
 
