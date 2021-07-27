@@ -1,6 +1,5 @@
 package md.tekwill.dao.idao;
 
-import md.tekwill.domain.Department;
 import md.tekwill.domain.Employee;
 
 public interface EmployeeDao {

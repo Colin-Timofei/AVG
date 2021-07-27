@@ -2,12 +2,13 @@ package md.tekwill.service.impl.array;
 
 import md.tekwill.dao.idao.DepartmentDao;
 import md.tekwill.dao.impl.array.DepartmentDaoImpl;
+import md.tekwill.dao.impl.arraylist.DepartmentDaoALImpl;
 import md.tekwill.domain.Department;
 import md.tekwill.service.iservice.DepartmentService;
 
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private static DepartmentDao departmentDao= new DepartmentDaoImpl();
+    private static DepartmentDao departmentDao= new DepartmentDaoALImpl();
 
     public String[] create(Department department) {
 

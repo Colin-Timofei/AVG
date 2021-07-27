@@ -1,4 +1,4 @@
-package md.tekwill.main;
+package md.tekwill.main.swing1;
 
 import md.tekwill.domain.Department;
 
@@ -7,8 +7,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
-import static md.tekwill.main.SwingMain.*;
-import static md.tekwill.main.Helper.*;
+import static md.tekwill.main.swing1.SwingMain.*;
+import static md.tekwill.main.swing1.Helper.*;
 
 public class DepartmentPanel {
 

@@ -1,9 +1,9 @@
-package md.tekwill.main;
+package md.tekwill.main.swing1;
 
 import md.tekwill.service.impl.array.DepartmentServiceImpl;
 import md.tekwill.service.impl.array.EmployeeServiceImpl;
-import static md.tekwill.main.DepartmentPanel.makeDepartmentPanel;
-import static md.tekwill.main.EmployeePanel.makeEmployeePanel;
+import static md.tekwill.main.swing1.DepartmentPanel.makeDepartmentPanel;
+import static md.tekwill.main.swing1.EmployeePanel.makeEmployeePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +23,7 @@ public class SwingMain {
 
     static Dimension bigDimension = new Dimension(250, rowHeight);
     static Dimension mediumPlusDimension = new Dimension(150, rowHeight);
-    static Dimension mediumDimension = new Dimension(100,rowHeight);
+    static Dimension mediumDimension = new Dimension(100, rowHeight);
     static Dimension smallDimension = new Dimension(75, rowHeight);
 
     SwingMain() {

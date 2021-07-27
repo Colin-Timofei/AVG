@@ -4,13 +4,15 @@ import md.tekwill.dao.idao.DepartmentDao;
 import md.tekwill.dao.idao.EmployeeDao;
 import md.tekwill.dao.impl.array.DepartmentDaoImpl;
 import md.tekwill.dao.impl.array.EmployeeDaoImpl;
+import md.tekwill.dao.impl.arraylist.DepartmentDaoALImpl;
+import md.tekwill.dao.impl.arraylist.EmployeeDaoALImpl;
 import md.tekwill.domain.Employee;
 import md.tekwill.service.iservice.EmployeeService;
 
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private static EmployeeDao employeeDao= new EmployeeDaoImpl();
-    private static DepartmentDao departmentDao= new DepartmentDaoImpl();
+    private static EmployeeDao employeeDao= new EmployeeDaoALImpl();
+    private static DepartmentDao departmentDao= new DepartmentDaoALImpl();
 
     @Override
     public String[] create(Employee employee) {

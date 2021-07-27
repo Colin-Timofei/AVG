@@ -1,4 +1,4 @@
-package md.tekwill.main;
+package md.tekwill.main.swing1;
 
 import md.tekwill.domain.Department;
 import md.tekwill.domain.Employee;
@@ -8,8 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
-import static md.tekwill.main.SwingMain.*;
-import static md.tekwill.main.Helper.*;
+import static md.tekwill.main.swing1.SwingMain.*;
+import static md.tekwill.main.swing1.Helper.*;
 
 public class EmployeePanel {
 
@@ -184,8 +184,11 @@ public class EmployeePanel {
 
                         String[] departments = dsi.getDepartmentNames();
                         JLabel departmentLabel = makeLabel("Department : ", smallDimension);
+
                         JComboBox departmentComboBox = new JComboBox(departments);
+                        departmentComboBox.setSelectedItem("getElement[4]");
                         departmentComboBox.setPreferredSize(mediumPlusDimension);
+
                         panel.add(departmentLabel);
                         panel.add(departmentComboBox);
 

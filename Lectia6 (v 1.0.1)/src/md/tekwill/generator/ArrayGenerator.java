@@ -1,4 +1,4 @@
-package md.tekwill.generator.array;
+package md.tekwill.generator;
 
 import md.tekwill.domain.Department;
 import md.tekwill.domain.Employee;

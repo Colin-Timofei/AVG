@@ -3,7 +3,7 @@ package md.tekwill.dao.impl.array;
 
 import md.tekwill.dao.idao.EmployeeDao;
 import md.tekwill.domain.Employee;
-import md.tekwill.generator.array.ArrayGenerator;
+import md.tekwill.generator.ArrayGenerator;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 

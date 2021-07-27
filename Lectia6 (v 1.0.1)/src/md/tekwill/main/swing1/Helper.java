@@ -1,4 +1,4 @@
-package md.tekwill.main;
+package md.tekwill.main.swing1;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +7,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import static md.tekwill.main.SwingMain.*;
+import static md.tekwill.main.swing1.SwingMain.*;
 
 public class Helper {
 

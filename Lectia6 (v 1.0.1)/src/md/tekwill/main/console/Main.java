@@ -1,4 +1,4 @@
-package md.tekwill.main;
+package md.tekwill.main.console;
 
 // make service !!!
 // work with arraylist

@@ -1,16 +1,18 @@
-package md.tekwill.dao.impl.array;
+package md.tekwill.dao.impl.arraylist;
 
 import md.tekwill.dao.idao.DepartmentDao;
 import md.tekwill.domain.Department;
-import md.tekwill.generator.ArrayGenerator;
+import md.tekwill.generator.ArrayListGenerator;
 
-public class DepartmentDaoImpl implements DepartmentDao {
+import java.util.ArrayList;
+
+public class DepartmentDaoALImpl implements DepartmentDao {
 
     private final static int maxDepartments = 15;
-    private static Department[] departments = new Department[maxDepartments];
+    private static ArrayList<Department> departments = new ArrayList<Department>();
 
     static {
-        ArrayGenerator.generateDepartments(departments);
+        ArrayListGenerator.generateDepartments(departments);
     }
 
     @Override
@@ -22,8 +24,8 @@ public class DepartmentDaoImpl implements DepartmentDao {
             return null;
         }
         else {
-            departments[position] = newDepartment;
-            return departments[position];
+            departments.add(newDepartment);
+            return departments.get(position);
         }
     }
 
@@ -36,7 +38,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             return null;
         }
         else {
-            return departments[position];
+            return departments.get(position);
         }
     }
 
@@ -49,7 +51,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
             return null;
         }
         else {
-            return departments[position];
+            return departments.get(position);
         }
     }
 
@@ -62,11 +64,12 @@ public class DepartmentDaoImpl implements DepartmentDao {
             return false;
         }
         else {
-            departments[position].setName(updatedDepartment.getName());
+            departments.get(position).setName(updatedDepartment.getName());
             return true;
         }
     }
 
+    @Override
     public boolean delete(int departmentId) {
 
         int position = findPositionById(departmentId);
@@ -74,63 +77,55 @@ public class DepartmentDaoImpl implements DepartmentDao {
         if (position == -1) {
             return false;
         } else {
-            moveToRightFromPosition(position);
+            departments.remove(position);
             return true;
         }
     }
 
+    @Override
     public int findFirstEmptyPosition() {
 
-        for(int i = 0; i < maxDepartments; i++) {
-            if (departments[i] == null) {
-                return i;
-            }
-        }
-        return -1;
+        return departments.size() < maxDepartments ? departments.size() : -1;
     }
 
+    @Override
     public int findPositionById(int departmentId) {
 
-        for(int i = 0; i < maxDepartments; i++) {
-            if(departments[i] != null && departments[i].getId() == departmentId) {
-                return i;
+        for(Department x : departments) {
+            if (x.getId() == departmentId) {
+                return departments.indexOf(x);
             }
         }
+
         return -1;
     }
 
+    @Override
     public int findPositionByName(String departmentName) {
 
-        for(int i = 0; i < maxDepartments; i++) {
-            if(departments[i] != null && departments[i].getName().equals(departmentName)) {
-                return i;
+        for(Department x : departments) {
+            if (x.getName().equals(departmentName)) {
+                return departments.indexOf(x);
             }
         }
+
         return -1;
     }
 
-    private void moveToRightFromPosition(int position) {
-
-        for(int i = position; i < maxDepartments-1; i++)  {
-            departments[i] = departments[i+1];
-        }
-
-        departments[maxDepartments-1] = null;
-    }
-
+    @Override
     public Department[] getDepartments() {
-        return departments;
-    }
 
-    public void showAll() {
+        int size = departments.size();
+        Department[] tmp = new Department[size];
 
-        for(int i = 0; i < maxDepartments; i++) {
-            if(departments[i] != null) {
-                System.out.println(departments[i].getId() + " " + departments[i].getName());
-            }
+        for(int i = 0; i < size; i++) {
+            tmp[i] = departments.get(i);
         }
+
+        return tmp;
     }
 
+    @Override
     public int getMaxElements() {
         return maxDepartments;
     }
