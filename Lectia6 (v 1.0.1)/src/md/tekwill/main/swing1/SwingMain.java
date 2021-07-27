@@ -1,7 +1,7 @@
 package md.tekwill.main.swing1;
 
-import md.tekwill.service.impl.array.DepartmentServiceImpl;
-import md.tekwill.service.impl.array.EmployeeServiceImpl;
+import md.tekwill.service.impl.DepartmentServiceImpl;
+import md.tekwill.service.impl.EmployeeServiceImpl;
 import static md.tekwill.main.swing1.DepartmentPanel.makeDepartmentPanel;
 import static md.tekwill.main.swing1.EmployeePanel.makeEmployeePanel;
 

@@ -1,4 +1,4 @@
-package md.tekwill.service.impl.array;
+package md.tekwill.service.impl;
 
 import md.tekwill.dao.idao.DepartmentDao;
 import md.tekwill.dao.idao.EmployeeDao;
@@ -6,13 +6,15 @@ import md.tekwill.dao.impl.array.DepartmentDaoImpl;
 import md.tekwill.dao.impl.array.EmployeeDaoImpl;
 import md.tekwill.dao.impl.arraylist.DepartmentDaoALImpl;
 import md.tekwill.dao.impl.arraylist.EmployeeDaoALImpl;
+import md.tekwill.dao.impl.map.DepartmentDaoMapImpl;
+import md.tekwill.dao.impl.map.EmployeeDaoMapImpl;
 import md.tekwill.domain.Employee;
 import md.tekwill.service.iservice.EmployeeService;
 
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private static EmployeeDao employeeDao= new EmployeeDaoALImpl();
-    private static DepartmentDao departmentDao= new DepartmentDaoALImpl();
+    private static EmployeeDao employeeDao= new EmployeeDaoMapImpl();
+    private static DepartmentDao departmentDao= new DepartmentDaoMapImpl();
 
     @Override
     public String[] create(Employee employee) {

@@ -4,11 +4,8 @@ package md.tekwill.main.console;
 // work with arraylist
 // create UI
 
-import md.tekwill.domain.Department;
-import md.tekwill.domain.Employee;
-import md.tekwill.service.impl.array.DepartmentServiceImpl;
-import md.tekwill.service.impl.array.EmployeeServiceImpl;
-import md.tekwill.service.iservice.EmployeeService;
+import md.tekwill.service.impl.DepartmentServiceImpl;
+import md.tekwill.service.impl.EmployeeServiceImpl;
 
 public class Main {
 

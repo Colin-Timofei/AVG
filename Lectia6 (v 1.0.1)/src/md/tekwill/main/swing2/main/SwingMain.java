@@ -1,7 +1,7 @@
 package md.tekwill.main.swing2.main;
 
-import md.tekwill.service.impl.array.DepartmentServiceImpl;
-import md.tekwill.service.impl.array.EmployeeServiceImpl;
+import md.tekwill.service.impl.DepartmentServiceImpl;
+import md.tekwill.service.impl.EmployeeServiceImpl;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
