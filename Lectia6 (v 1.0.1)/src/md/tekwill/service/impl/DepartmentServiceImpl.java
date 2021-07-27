@@ -5,11 +5,20 @@ import md.tekwill.dao.impl.array.DepartmentDaoImpl;
 import md.tekwill.dao.impl.arraylist.DepartmentDaoALImpl;
 import md.tekwill.dao.impl.map.DepartmentDaoMapImpl;
 import md.tekwill.domain.Department;
+import md.tekwill.main.swing2.main.SwingMain;
 import md.tekwill.service.iservice.DepartmentService;
 
 public class DepartmentServiceImpl implements DepartmentService {
 
-    private static DepartmentDao departmentDao= new DepartmentDaoMapImpl();
+    private static DepartmentDao departmentDao;
+
+    static {
+        switch (SwingMain.variant) {
+            case "Array" : departmentDao = new DepartmentDaoImpl(); break;
+            case "ArrayList" : departmentDao = new DepartmentDaoALImpl(); break;
+            case "Map" : departmentDao = new DepartmentDaoMapImpl(); break;
+        }
+    }
 
     public String[] create(Department department) {
 

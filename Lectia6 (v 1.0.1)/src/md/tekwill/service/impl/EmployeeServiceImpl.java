@@ -9,12 +9,24 @@ import md.tekwill.dao.impl.arraylist.EmployeeDaoALImpl;
 import md.tekwill.dao.impl.map.DepartmentDaoMapImpl;
 import md.tekwill.dao.impl.map.EmployeeDaoMapImpl;
 import md.tekwill.domain.Employee;
+import md.tekwill.main.swing2.main.SwingMain;
 import md.tekwill.service.iservice.EmployeeService;
 
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private static EmployeeDao employeeDao= new EmployeeDaoMapImpl();
-    private static DepartmentDao departmentDao= new DepartmentDaoMapImpl();
+    private static EmployeeDao employeeDao;
+    private static DepartmentDao departmentDao;
+
+    static {
+        switch (SwingMain.variant) {
+            case "Array" : departmentDao = new DepartmentDaoImpl();
+                employeeDao = new EmployeeDaoImpl(); break;
+            case "ArrayList" : departmentDao = new DepartmentDaoALImpl();
+                employeeDao = new EmployeeDaoALImpl(); break;
+            case "Map" : departmentDao = new DepartmentDaoMapImpl();
+                employeeDao = new EmployeeDaoMapImpl(); break;
+        }
+    }
 
     @Override
     public String[] create(Employee employee) {

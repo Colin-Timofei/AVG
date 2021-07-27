@@ -10,6 +10,9 @@ import static md.tekwill.main.swing2.containers.Panels.*;
 
 public class SwingMain {
 
+    // Array, ArrayList, Map
+    public static String variant = "Map";
+
     public static DepartmentServiceImpl dsi = new DepartmentServiceImpl();
     public static EmployeeServiceImpl esi = new EmployeeServiceImpl();
 
