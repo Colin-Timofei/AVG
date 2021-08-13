@@ -1,14 +1,15 @@
 package md.tekwill.service.iservice;
 
 import md.tekwill.domain.Department;
+import md.tekwill.domain.DepartmentResponse;
 
 public interface DepartmentService {
 
-    String[] create(Department department);
+    DepartmentResponse create(Department department);
 
-    String[] read(int departmentId);
+    DepartmentResponse read(int departmentId);
 
-    String[] update(int departmentId, Department updatedDepartment);
+    DepartmentResponse update(int departmentId, Department updatedDepartment);
 
-    String[] delete(int departmentId);
+    DepartmentResponse delete(int departmentId);
 }

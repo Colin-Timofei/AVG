@@ -1,94 +1,82 @@
 package md.tekwill.dao.impl.array;
 
-
 import md.tekwill.dao.idao.EmployeeDao;
+import md.tekwill.domain.Department;
 import md.tekwill.domain.Employee;
-import md.tekwill.generator.ArrayGenerator;
+
+import java.util.Arrays;
+
+import static md.tekwill.dao.validator.Validator.*;
+import static md.tekwill.dao.generator.Generator.*;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
-    private final static int maxEmployees = 50;
+    private static int arraySize = 0;
     private static Employee[] employees = new Employee[maxEmployees];
 
     static {
-        ArrayGenerator.generateEmployees(employees);
-    }
-
-    @Override
-    public Employee create(Employee newEmployee) {
-
-        int position = findFirstEmptyPosition();
-
-        if(position == -1) {
-            return null;
-        }
-        else {
-            employees[position] = newEmployee;
-            return employees[position];
-        }
-    }
-
-    @Override
-    public Employee read(int employeeId) {
-
-        int position = findPositionById(employeeId);
-
-        if(position == -1) {
-            return null;
-        }
-        else {
-            return employees[position];
-        }
-    }
-
-    @Override
-    public boolean update(int employeeId, Employee updatedEmployee) {
-
-        int position = findPositionById(employeeId);
-
-        if(position == -1) {
-            return false;
-        }
-        else {
-            employees[position].setFirstName(updatedEmployee.getFirstName());
-            employees[position].setLastName(updatedEmployee.getLastName());
-            employees[position].setDepartment(updatedEmployee.getDepartment());
-            return true;
-        }
-    }
-
-    @Override
-    public boolean delete(int employeeId) {
-
-        int position = findPositionById(employeeId);
-
-        if(position == -1) {
-            return false;
-        }
-        else {
-            moveToRightFromPosition(position);
-            return true;
-        }
-    }
-
-    public int findFirstEmptyPosition() {
+        generateEmployees(employees);
 
         for(int i = 0; i < maxEmployees; i++) {
-            if (employees[i] == null) {
-                return i;
+            if(employees[i] != null) {
+                arraySize++;
             }
         }
-        return -1;
     }
 
-    public int findPositionById(int employeeId) {
+    @Override
+    public Employee create(Employee newEmployee) throws Exception {
 
-        for(int i = 0; i < maxEmployees; i++) {
-            if(employees[i] != null && employees[i].getId() == employeeId) {
-                return i;
+        if(checkInsert(arraySize, maxEmployees) && validateEmployee(newEmployee)) {
+            for(Employee x : employees) {
+                if(x == null) {
+                    x = newEmployee;
+                    arraySize++;
+                    return read(newEmployee.getId());
+                }
             }
         }
-        return -1;
+
+        return null;
+    }
+
+    @Override
+    public Employee read(int employeeId) throws Exception {
+
+        if(validateEmployeeID(employeeId)) {
+            for (Employee x : employees) {
+                if(x.getId() == employeeId) {
+                    return x;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Employee update(int employeeId, Employee updatedEmployee) throws Exception {
+
+        if(validateEmployeeID(employeeId) && validateEmployee(updatedEmployee)) {
+            read(employeeId).updateEmployee(updatedEmployee);
+            return read(employeeId);
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean delete(int employeeId) throws Exception {
+
+        if (validateEmployeeID(employeeId)) {
+            for (int i = 0; i < maxEmployees; i++) {
+                if(employees[i] != null && employees[i].getId() == employeeId) {
+                    moveToRightFromPosition(i);
+                    arraySize--;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void moveToRightFromPosition(int position) {
@@ -101,18 +89,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     public Employee[] getEmployees() {
-        return employees;
-    }
-
-    public void showAll() {
-        for(int i = 0; i < maxEmployees; i++) {
-            if(employees[i] != null) {
-                System.out.println(employees[i].getId() + " " + employees[i].getFirstName() + " " + employees[i].getLastName());
-            }
-        }
-    }
-
-    public int getMaxElements() {
-        return maxEmployees;
+        return Arrays.copyOfRange(employees, 0, arraySize-1);
     }
 }

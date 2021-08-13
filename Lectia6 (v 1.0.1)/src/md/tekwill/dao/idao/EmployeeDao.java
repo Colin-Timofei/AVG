@@ -4,24 +4,15 @@ import md.tekwill.domain.Employee;
 
 public interface EmployeeDao {
 
+    public final static int maxEmployees = 50;
 
-    // CRUD
+    Employee create(Employee employee) throws Exception;
 
-    Employee create(Employee employee);
+    Employee read(int employeeId) throws Exception;
 
-    Employee read(int employeeId);
+    Employee update(int employeeId, Employee updatedEmployee) throws Exception;
 
-    boolean update(int employeeId, Employee updatedEmployee);
-
-    boolean delete(int employeeId);
-
-    // additional
-
-    int findFirstEmptyPosition();
-
-    int findPositionById(int employeeId);
+    boolean delete(int employeeId) throws Exception;
 
     Employee[] getEmployees();
-
-    int getMaxElements();
 }

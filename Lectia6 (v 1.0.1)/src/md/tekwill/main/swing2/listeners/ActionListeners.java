@@ -1,7 +1,9 @@
 package md.tekwill.main.swing2.listeners;
 
 import md.tekwill.domain.Department;
+import md.tekwill.domain.DepartmentResponse;
 import md.tekwill.domain.Employee;
+import md.tekwill.domain.EmployeeResponse;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
@@ -40,10 +42,10 @@ public class ActionListeners {
     public static ActionListener createDepartmentButtonListener(JTextField departmentField, JLabel errorLabel) {
 
         return e -> {
-            String[] result = dsi.create(new Department(departmentField.getText()));
-            errorLabel.setText(result[1]);
+            DepartmentResponse result = dsi.create(new Department(departmentField.getText()));
+            errorLabel.setText(result.errorMessage);
 
-            if (Boolean.parseBoolean(result[0])) {
+            if (result.status) {
                 departmentTableModel.setDataVector(dsi.getAll(), departmentColumns);
             }
         };
@@ -52,10 +54,10 @@ public class ActionListeners {
     public static ActionListener updateDepartmentButtonListener(int id, JTextField departmentField, JLabel errorLabel) {
 
         return e -> {
-            String[] result = dsi.update(id, new Department(departmentField.getText()));
-            errorLabel.setText(result[1]);
+            DepartmentResponse result = dsi.update(id, new Department(departmentField.getText()));
+            errorLabel.setText(result.errorMessage);
 
-            if (Boolean.parseBoolean(result[0])) {
+            if (result.status) {
                 departmentTableModel.setDataVector(dsi.getAll(), departmentColumns);
             }
         };
@@ -74,10 +76,10 @@ public class ActionListeners {
     public static ActionListener createEmployeeButtonListener(JTextField firstNameField, JTextField lastNameField, JComboBox departmentComboBox, JLabel errorLabel) {
 
         return e -> {
-            String[] result = esi.create(new Employee(firstNameField.getText(), lastNameField.getText(), new Department((String)departmentComboBox.getSelectedItem())));
-            errorLabel.setText(result[1]);
+            EmployeeResponse result = esi.create(new Employee(firstNameField.getText(), lastNameField.getText(), new Department((String)departmentComboBox.getSelectedItem())));
+            errorLabel.setText(result.errorMessage);
 
-            if (Boolean.parseBoolean(result[0])) {
+            if (result.status) {
                 employeeTableModel.setDataVector(esi.getAll(), employeeColumns);
             }
         };
@@ -87,10 +89,10 @@ public class ActionListeners {
     public static ActionListener updateEmployeeButtonListener(int id, JTextField firstNameField, JTextField lastNameField, JComboBox departmentComboBox, JLabel errorLabel) {
 
         return e -> {
-            String[] result = esi.update(id, new Employee(firstNameField.getText(), lastNameField.getText(), new Department(departmentComboBox.getSelectedItem().toString())));
-            errorLabel.setText(result[1]);
+            EmployeeResponse result = esi.update(id, new Employee(firstNameField.getText(), lastNameField.getText(), new Department(departmentComboBox.getSelectedItem().toString())));
+            errorLabel.setText(result.errorMessage);
 
-            if (Boolean.parseBoolean(result[0])) {
+            if (result.status) {
                 employeeTableModel.setDataVector(esi.getAll(), employeeColumns);
             }
         };

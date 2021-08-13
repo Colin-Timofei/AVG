@@ -8,14 +8,20 @@ import md.tekwill.dao.impl.arraylist.DepartmentDaoALImpl;
 import md.tekwill.dao.impl.arraylist.EmployeeDaoALImpl;
 import md.tekwill.dao.impl.map.DepartmentDaoMapImpl;
 import md.tekwill.dao.impl.map.EmployeeDaoMapImpl;
+import md.tekwill.domain.Department;
+import md.tekwill.domain.DepartmentResponse;
 import md.tekwill.domain.Employee;
+import md.tekwill.domain.EmployeeResponse;
 import md.tekwill.main.swing2.main.SwingMain;
 import md.tekwill.service.iservice.EmployeeService;
+
+import java.time.format.DateTimeFormatter;
 
 public class EmployeeServiceImpl implements EmployeeService {
 
     private static EmployeeDao employeeDao;
     private static DepartmentDao departmentDao;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-uuuu kk:mm:ss");
 
     static {
         switch (SwingMain.variant) {
@@ -29,73 +35,106 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public String[] create(Employee employee) {
+    public EmployeeResponse create(Employee employee) {
 
-        if(employeeDao.findFirstEmptyPosition() == -1) {
-            return new String[] {"false", "cannot add more records !"};
-        } else if(employee.getDepartment().getName().equals("")) {
-            return new String[] {"false", "the employee must belong to a department"};
-        } else if (departmentDao.findPositionByName(employee.getDepartment().getName()) == -1) {
-            return new String[] {"false", "the employee must belong to an existing department"};
-        } else if (employee.getFirstName().equals("") || employee.getLastName().equals("")) {
-            return new String[] {"false", "the new employee must have a valid name"};
-        } else {
-            employeeDao.create(employee);
-            return new String[] {"true", "new record created !"};
+        EmployeeResponse employeeResponse;
+
+        try {
+            Employee tmp = employeeDao.create(employee);
+            if(tmp != null) {
+                employeeResponse = new EmployeeResponse(tmp);
+            } else {
+                throw new Exception("An error occurred !");
+            }
+        } catch(Exception e) {
+            employeeResponse = new EmployeeResponse(e);
         }
+
+        return employeeResponse;
     }
 
     @Override
-    public String[] read(int employeeId) {
+    public EmployeeResponse read(int employeeId) {
 
-        if(employeeDao.findPositionById(employeeId) == -1) {
-            return new String[] {"false", "cannot find an employee with the ID " + employeeId};
-        } else {
+        EmployeeResponse employeeResponse;
+
+        try {
             Employee tmp = employeeDao.read(employeeId);
-            return new String[] {"true", String.valueOf(tmp.getId()), tmp.getFirstName(), tmp.getLastName(), tmp.getDepartment().getName()};
+            if(tmp != null) {
+                employeeResponse = new EmployeeResponse(tmp);
+            } else {
+                throw new Exception("An error occurred !");
+            }
+        } catch(Exception e) {
+            employeeResponse = new EmployeeResponse(e);
         }
+
+        return employeeResponse;
     }
 
     @Override
-    public String[] update(int employeeId, Employee updatedEmployee) {
+    public EmployeeResponse update(int employeeId, Employee updatedEmployee) {
 
-        if(employeeDao.findPositionById(employeeId) == -1) {
-            return new String[] {"false", "cannot find an employee with the ID " + employeeId};
-        } else if(updatedEmployee.getDepartment().getName().equals("")) {
-            return new String[] {"false", "the employee must belong to a department !"};
-        } else if (departmentDao.findPositionByName(updatedEmployee.getDepartment().getName()) == -1) {
-            return new String[] {"false", "the employee must belong to an existing department !"};
-        } else if (updatedEmployee.getLastName().equals("") || updatedEmployee.getLastName().equals("")) {
-            return new String[] {"false", "the new employee must have a valid name !"};
-        } else {
-            employeeDao.update(employeeId, updatedEmployee);
-            return new String[] {"true", "the record had been adjusted !"};
+        EmployeeResponse employeeResponse;
+
+        try {
+            Employee tmp = employeeDao.update(employeeId, updatedEmployee);
+            if(tmp != null) {
+                employeeResponse = new EmployeeResponse(tmp);
+            } else {
+                throw new Exception("An error occurred !");
+            }
+        } catch(Exception e) {
+            employeeResponse = new EmployeeResponse(e);
         }
+
+        return employeeResponse;
     }
 
     @Override
-    public String[] delete(int employeeId) {
-        if(employeeDao.findPositionById(employeeId) == -1) {
-            return new String[] {"false", "cannot find an employee with the ID " + employeeId};
-        } else {
-            employeeDao.delete(employeeId);
-            return new String[] {"true", "employee deleted !"};
+    public EmployeeResponse delete(int employeeId) {
+
+        EmployeeResponse employeeResponse;
+
+        try {
+            boolean tmp = employeeDao.delete(employeeId);
+
+            if(tmp) {
+                employeeResponse = new EmployeeResponse(tmp);
+            } else {
+                throw new Exception("An error occurred !");
+            }
+        } catch(Exception e) {
+            employeeResponse = new EmployeeResponse(e);
         }
+
+        return employeeResponse;
     }
 
     public String[][] getAll() {
 
-        int size = employeeDao.findFirstEmptyPosition() == -1 ? employeeDao.getMaxElements() : employeeDao.findFirstEmptyPosition();
-        String[][] result = new String[size][4];
-        Employee[] temp = employeeDao.getEmployees();
+        Employee[] tmp = employeeDao.getEmployees();
+        int size = tmp.length;
+        String[][] result;
 
-        for(int i = 0; i < size; i++) {
-            result[i][0] = String.valueOf(temp[i].getId());
-            result[i][1] = temp[i].getFirstName();
-            result[i][2] = temp[i].getLastName();
-            result[i][3] = temp[i].getDepartment().getName();
+
+        if(size != 0) {
+
+            result = new String[size][6];
+
+            for(int i = 0; i < size; i++) {
+                result[i][0] = String.valueOf(tmp[i].getId());
+                result[i][1] = tmp[i].getFirstName();
+                result[i][2] = tmp[i].getLastName();
+                result[i][3] = tmp[i].getDepartment().getName();
+                result[i][4] = tmp[i].getCreatedAt().format(formatter);
+                result[i][5] = tmp[i].getLastUpdated().format(formatter);
+            }
+
+            return result;
+
         }
 
-        return result;
+        return null;
     }
 }

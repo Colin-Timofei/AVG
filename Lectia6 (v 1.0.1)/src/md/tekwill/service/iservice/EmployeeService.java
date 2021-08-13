@@ -1,13 +1,15 @@
 package md.tekwill.service.iservice;
 
 import md.tekwill.domain.Employee;
+import md.tekwill.domain.EmployeeResponse;
 
 public interface EmployeeService {
-    String[] create(Employee employee);
 
-    String[] read(int employeeId);
+    EmployeeResponse create(Employee employee);
 
-    String[] update(int employeeId, Employee updatedEmployee);
+    EmployeeResponse read(int employeeId);
 
-    String[] delete(int employeeId);
+    EmployeeResponse update(int employeeId, Employee updatedEmployee);
+
+    EmployeeResponse delete(int employeeId);
 }

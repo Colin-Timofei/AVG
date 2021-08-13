@@ -12,13 +12,13 @@ public class Main {
     public static void main(String[] args) {
 
         // Department + Employee Service
-        DepartmentServiceImpl dsi = new DepartmentServiceImpl();
-        EmployeeServiceImpl esi = new EmployeeServiceImpl();
-
-        showDepartmentsArray(dsi);
-        showEmployeesArray(esi);
-
-        String[] helper;
+//        DepartmentServiceImpl dsi = new DepartmentServiceImpl();
+//        EmployeeServiceImpl esi = new EmployeeServiceImpl();
+//
+//        showDepartmentsArray(dsi);
+//        showEmployeesArray(esi);
+//
+//        String[] helper;
 
 
         // DEPARTMENTS
@@ -272,25 +272,25 @@ public class Main {
 //        }
     }
 
-    public static void showDepartmentsArray(DepartmentServiceImpl dsi) {
-
-        String[][] da = dsi.getAll();
-
-        for (String[] x : da) {
-            System.out.println(x[0] + " " + x[1]);
-        }
-
-        System.out.println();
-    }
-
-    public static void showEmployeesArray(EmployeeServiceImpl esi) {
-
-        String[][] da = esi.getAll();
-
-        for (String[] x : da) {
-            System.out.println(x[0] + " " + x[1] + " " + x[2] + " / " + x[3] + " dpt");
-        }
-
-        System.out.println();
-    }
+//    public static void showDepartmentsArray(DepartmentServiceImpl dsi) {
+//
+//        String[][] da = dsi.getAll();
+//
+//        for (String[] x : da) {
+//            System.out.println(x[0] + " " + x[1]);
+//        }
+//
+//        System.out.println();
+//    }
+//
+//    public static void showEmployeesArray(EmployeeServiceImpl esi) {
+//
+//        String[][] da = esi.getAll();
+//
+//        for (String[] x : da) {
+//            System.out.println(x[0] + " " + x[1] + " " + x[2] + " / " + x[3] + " dpt");
+//        }
+//
+//        System.out.println();
+//    }
 }

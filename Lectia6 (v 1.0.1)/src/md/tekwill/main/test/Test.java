@@ -1,24 +1,21 @@
 package md.tekwill.main.test;
 
-import md.tekwill.domain.Department;
+import md.tekwill.domain.Employee;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public class Test {
+import static md.tekwill.dao.generator.Generator.*;
 
-    public static void main(String args[])
-    {
-        ArrayList<Department> arrayList = new ArrayList<>();
+public class Test
+{
+    public static void main(String[] args) {
 
-        Department department1 = new Department("Unu");
-        Department department2 = new Department("Doi");
-        Department department3 = new Department("Trei");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM uuuu kk:mm");
 
-        arrayList.add(department1);
-        arrayList.add(department3);
-        arrayList.add(department2);
-
-        System.out.println(arrayList.get(1).getName());
-
+        System.out.println(LocalDateTime.now().format(formatter));
     }
+
 }

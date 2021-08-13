@@ -10,8 +10,8 @@ import static md.tekwill.main.swing2.containers.ScrollPanes.*;
 
 public class Boxes {
 
-    static Dimension firstBoxDimension = new Dimension(400, 300);
-    static Dimension secondBoxDimension = new Dimension(400, 100);
+    static Dimension firstBoxDimension = new Dimension(850, 300);
+    static Dimension secondBoxDimension = new Dimension(850, 100);
 
     public static Box firstBox(JTable table, MouseAdapter adapter, int[] width) {
 

@@ -2,131 +2,82 @@ package md.tekwill.dao.impl.arraylist;
 
 import md.tekwill.dao.idao.DepartmentDao;
 import md.tekwill.domain.Department;
-import md.tekwill.generator.ArrayListGenerator;
+
+import static md.tekwill.dao.validator.Validator.*;
+import static md.tekwill.dao.generator.Generator.*;
 
 import java.util.ArrayList;
 
 public class DepartmentDaoALImpl implements DepartmentDao {
 
-    private final static int maxDepartments = 15;
     private static ArrayList<Department> departments = new ArrayList<Department>();
 
     static {
-        ArrayListGenerator.generateDepartments(departments);
+        generateDepartments(departments);
     }
 
     @Override
-    public Department create(Department newDepartment) {
+    public Department create(Department newDepartment) throws Exception {
 
-        int position = findFirstEmptyPosition();
-
-        if(position == -1) {
-            return null;
-        }
-        else {
+        if(checkInsert(departments.size(), maxDepartments) && validateDepartment(newDepartment)) {
             departments.add(newDepartment);
-            return departments.get(position);
+            return read(newDepartment.getId());
         }
+
+        return null;
     }
 
     @Override
-    public Department read(int departmentId) {
+    public Department read(int departmentId) throws Exception {
 
-        int position = findPositionById(departmentId);
-
-        if(position == -1) {
-            return null;
-        }
-        else {
-            return departments.get(position);
-        }
-    }
-
-    @Override
-    public Department read(String departmentName) {
-
-        int position = findPositionByName(departmentName);
-
-        if(position == -1) {
-            return null;
-        }
-        else {
-            return departments.get(position);
-        }
-    }
-
-    @Override
-    public boolean update(int departmentId, Department updatedDepartment) {
-
-        int position = findPositionById(departmentId);
-
-        if(position == -1) {
-            return false;
-        }
-        else {
-            departments.get(position).setName(updatedDepartment.getName());
-            return true;
-        }
-    }
-
-    @Override
-    public boolean delete(int departmentId) {
-
-        int position = findPositionById(departmentId);
-
-        if (position == -1) {
-            return false;
-        } else {
-            departments.remove(position);
-            return true;
-        }
-    }
-
-    @Override
-    public int findFirstEmptyPosition() {
-
-        return departments.size() < maxDepartments ? departments.size() : -1;
-    }
-
-    @Override
-    public int findPositionById(int departmentId) {
-
-        for(Department x : departments) {
-            if (x.getId() == departmentId) {
-                return departments.indexOf(x);
+        if(validateDepartmentID(departmentId)) {
+            for (Department x : departments) {
+                if(x.getId() == departmentId) {
+                    return x;
+                }
             }
         }
-
-        return -1;
+        return null;
     }
 
     @Override
-    public int findPositionByName(String departmentName) {
+    public Department read(String departmentName) throws Exception {
 
-        for(Department x : departments) {
-            if (x.getName().equals(departmentName)) {
-                return departments.indexOf(x);
+        if(validateDepartmentName(departmentName)) {
+            for (Department x : departments) {
+                if(x.getName().equals(departmentName)) {
+                    return x;
+                }
             }
         }
-
-        return -1;
+        return null;
     }
 
     @Override
+    public Department update(int departmentId, Department updatedDepartment) throws Exception {
+
+        if(validateDepartmentID(departmentId) && validateDepartment(updatedDepartment)) {
+            read(departmentId).updateDepartment(updatedDepartment);
+            return read(departmentId);
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean delete(int departmentId) throws Exception {
+
+        if (validateDepartmentID(departmentId)) {
+            if(read(departmentId) != null) {
+                departments.remove(read(departmentId));
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Department[] getDepartments() {
 
-        int size = departments.size();
-        Department[] tmp = new Department[size];
-
-        for(int i = 0; i < size; i++) {
-            tmp[i] = departments.get(i);
-        }
-
-        return tmp;
-    }
-
-    @Override
-    public int getMaxElements() {
-        return maxDepartments;
+        return departments.toArray(new Department[0]);
     }
 }

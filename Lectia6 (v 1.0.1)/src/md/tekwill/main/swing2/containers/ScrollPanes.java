@@ -10,7 +10,7 @@ public class ScrollPanes {
         int size = width.length;
 
         for(int i = 0; i < size; i++) {
-            table.getColumnModel().getColumn(i).setPreferredWidth(width[i]);
+            table.getColumnModel().getColumn(i).setMinWidth(width[i]);
         }
 
         table.addMouseListener(adapter);

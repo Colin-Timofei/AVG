@@ -5,12 +5,16 @@ import md.tekwill.dao.impl.array.DepartmentDaoImpl;
 import md.tekwill.dao.impl.arraylist.DepartmentDaoALImpl;
 import md.tekwill.dao.impl.map.DepartmentDaoMapImpl;
 import md.tekwill.domain.Department;
+import md.tekwill.domain.DepartmentResponse;
 import md.tekwill.main.swing2.main.SwingMain;
 import md.tekwill.service.iservice.DepartmentService;
+
+import java.time.format.DateTimeFormatter;
 
 public class DepartmentServiceImpl implements DepartmentService {
 
     private static DepartmentDao departmentDao;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d-MMM-uuuu kk:mm:ss");
 
     static {
         switch (SwingMain.variant) {
@@ -20,75 +24,114 @@ public class DepartmentServiceImpl implements DepartmentService {
         }
     }
 
-    public String[] create(Department department) {
+    public DepartmentResponse create(Department department) {
 
-        if(department.getName().equals("")) {
-            return new String[] {"false", "The new department should have a name !"};
-        } else if(departmentDao.findFirstEmptyPosition() == -1) {
-            return new String[] {"false", "Cannot add more records !"};
-        } else if (departmentDao.findPositionByName(department.getName()) != -1) {
-            return new String[] {"false", department.getName() + " department already exists !"};
-        } else {
-            departmentDao.create(department);
-            return new String[] {"true", "New record created !"};
+        DepartmentResponse departmentResponse;
+
+        try {
+            Department tmp = departmentDao.create(department);
+            if(tmp != null) {
+                departmentResponse = new DepartmentResponse(tmp);
+            } else {
+                throw new Exception("An error occurred !");
+            }
+        } catch(Exception e) {
+            departmentResponse = new DepartmentResponse(e);
         }
+
+        return departmentResponse;
     }
 
-    public String[] read(int departmentId) {
+    public DepartmentResponse read(int departmentId) {
 
-        if(departmentDao.findPositionById(departmentId) == -1) {
-            return new String[] {"false", "cannot find a department with the ID " + departmentId};
-        } else {
+        DepartmentResponse departmentResponse;
+
+        try {
             Department tmp = departmentDao.read(departmentId);
-            return new String[] {"true", String.valueOf(tmp.getId()), tmp.getName()};
+            if(tmp != null) {
+                departmentResponse = new DepartmentResponse(tmp);
+            } else {
+                throw new Exception("An error occurred !");
+            }
+        } catch(Exception e) {
+            departmentResponse = new DepartmentResponse(e);
         }
+
+        return departmentResponse;
     }
 
-    public String[] update(int departmentId, Department updatedDepartment) {
+    public DepartmentResponse update(int departmentId, Department updatedDepartment) {
 
-        if (updatedDepartment.getName().equals("")) {
-            return new String[] {"false", "The department should have a name !"};
-        } else if(departmentDao.findPositionById(departmentId) == -1) {
-            return new String[] {"false", "Cannot find a department with the ID " + departmentId};
-        } else if (departmentDao.findPositionByName(updatedDepartment.getName()) != -1) {
-            return new String[] {"false", "A department named " + updatedDepartment.getName() + " already exists !"};
-        } else {
-            departmentDao.update(departmentId, updatedDepartment);
-            return new String[] {"true", "Department updated !"};
+        DepartmentResponse departmentResponse;
+
+        try {
+            Department tmp = departmentDao.update(departmentId, updatedDepartment);
+            if(tmp != null) {
+                departmentResponse = new DepartmentResponse(tmp);
+            } else {
+                throw new Exception("An error occurred !");
+            }
+        } catch(Exception e) {
+            departmentResponse = new DepartmentResponse(e);
         }
+
+        return departmentResponse;
     }
 
-    public String[] delete(int departmentId) {
-        if(departmentDao.findPositionById(departmentId) == -1) {
-            return new String[] {"false", "cannot find a department with the ID " + departmentId};
-        } else {
-            departmentDao.delete(departmentId);
-            return new String[] {"true", "department deleted !"};
+    public DepartmentResponse delete(int departmentId) {
+
+        DepartmentResponse departmentResponse;
+
+        try {
+            boolean tmp = departmentDao.delete(departmentId);
+
+            if(tmp) {
+                departmentResponse = new DepartmentResponse(tmp);
+            } else {
+                throw new Exception("An error occurred !");
+            }
+        } catch(Exception e) {
+            departmentResponse = new DepartmentResponse(e);
         }
+
+        return departmentResponse;
     }
 
     public String[][] getAll() {
 
-        int size = departmentDao.findFirstEmptyPosition() == -1 ? departmentDao.getMaxElements() : departmentDao.findFirstEmptyPosition();
-        String[][] result = new String[size][2];
-        Department[] temp = departmentDao.getDepartments();
+        Department[] tmp = departmentDao.getDepartments();
+        int size = tmp.length;
+        String[][] result;
 
-        for(int i = 0; i < size; i++) {
-            result[i][0] = String.valueOf(temp[i].getId());
-            result[i][1] = temp[i].getName();
+
+        if(size != 0) {
+
+            result = new String[size][4];
+
+            for(int i = 0; i < size; i++) {
+                result[i][0] = String.valueOf(tmp[i].getId());
+                result[i][1] = tmp[i].getName();
+                result[i][2] = tmp[i].getCreatedAt().format(formatter);
+                result[i][3] = tmp[i].getLastUpdated().format(formatter);
+            }
+
+            return result;
+
         }
 
-        return result;
+        return null;
     }
 
     public String[] getDepartmentNames() {
 
-        int size = departmentDao.findFirstEmptyPosition() == -1 ? departmentDao.getMaxElements() : departmentDao.findFirstEmptyPosition();
+        Department[] tmp = departmentDao.getDepartments();
+        int size = tmp.length;
+
         String[] result = new String[size];
-        Department[] temp = departmentDao.getDepartments();
+
 
         for(int i = 0; i < size; i++) {
-            result[i] = temp[i].getName();
+            result[i] = tmp[i].getName();
         }
 
         return result;

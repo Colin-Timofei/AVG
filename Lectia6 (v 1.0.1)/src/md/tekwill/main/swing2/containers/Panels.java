@@ -16,7 +16,7 @@ public class Panels {
         tmp.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
         tmp.setLayout(new BoxLayout(tmp, BoxLayout.PAGE_AXIS));
 
-        Box box1 = firstBox(departmentTable, departmentTableListener(), new int[] {100, 200});
+        Box box1 = firstBox(departmentTable, departmentTableListener(), new int[] {100, 250, 250, 250});
         tmp.add(box1);
 
         Box box2 = secondBox("Create Department", createNewDepartmentButtonListener());
@@ -31,7 +31,7 @@ public class Panels {
         tmp.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
         tmp.setLayout(new BoxLayout(tmp, BoxLayout.PAGE_AXIS));
 
-        Box box1 = firstBox(employeeTable, employeeTableListener(), new int[] {50, 100, 100, 100});
+        Box box1 = firstBox(employeeTable, employeeTableListener(), new int[] {50, 150, 150, 150, 150, 150});
         tmp.add(box1);
 
         Box box2 = secondBox("Add New Employee", createNewEmployeeButtonListener());

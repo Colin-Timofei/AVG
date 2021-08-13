@@ -12,16 +12,16 @@ public class SwingMain {
 
     // change variant to use different dao implementations
     // options : Array, ArrayList, Map
-    public static String variant = "Array";
+    public static String variant = "ArrayList";
 
     public static DepartmentServiceImpl dsi = new DepartmentServiceImpl();
     public static EmployeeServiceImpl esi = new EmployeeServiceImpl();
 
-    public static JFrame jfrm = new JFrame("DAO v1.0.2");
+    public static JFrame jfrm = new JFrame("DAO v1.0.3");
 
     public static String[] departments = dsi.getDepartmentNames();
-    public static final String[] departmentColumns = new String[]{"ID", "Name"};
-    public static final String[] employeeColumns = new String[]{"ID", "First Name", "Last Name", "Department"};
+    public static final String[] departmentColumns = new String[]{"ID", "Name", "Created", "Last Updated"};
+    public static final String[] employeeColumns = new String[]{"ID", "First Name", "Last Name", "Department", "Created", "Last Updated"};
 
     public static DefaultTableModel departmentTableModel = new DefaultTableModel(dsi.getAll(), departmentColumns);
     public static DefaultTableModel employeeTableModel = new DefaultTableModel(esi.getAll(), employeeColumns);
@@ -31,7 +31,7 @@ public class SwingMain {
 
     SwingMain() {
 
-        jfrm.setSize(400, 400);
+        jfrm.setSize(850, 400);
         jfrm.setResizable(false);
         jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

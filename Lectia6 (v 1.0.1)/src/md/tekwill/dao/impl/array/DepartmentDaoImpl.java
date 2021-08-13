@@ -2,111 +2,94 @@ package md.tekwill.dao.impl.array;
 
 import md.tekwill.dao.idao.DepartmentDao;
 import md.tekwill.domain.Department;
-import md.tekwill.generator.ArrayGenerator;
+
+import java.util.Arrays;
+
+import static md.tekwill.dao.validator.Validator.*;
+import static md.tekwill.dao.generator.Generator.*;
+
 
 public class DepartmentDaoImpl implements DepartmentDao {
 
-    private final static int maxDepartments = 15;
+    private static int arraySize = 0;
     private static Department[] departments = new Department[maxDepartments];
 
     static {
-        ArrayGenerator.generateDepartments(departments);
-    }
-
-    @Override
-    public Department create(Department newDepartment) {
-
-        int position = findFirstEmptyPosition();
-
-        if(position == -1) {
-            return null;
-        }
-        else {
-            departments[position] = newDepartment;
-            return departments[position];
-        }
-    }
-
-    @Override
-    public Department read(int departmentId) {
-
-        int position = findPositionById(departmentId);
-
-        if(position == -1) {
-            return null;
-        }
-        else {
-            return departments[position];
-        }
-    }
-
-    @Override
-    public Department read(String departmentName) {
-
-        int position = findPositionByName(departmentName);
-
-        if(position == -1) {
-            return null;
-        }
-        else {
-            return departments[position];
-        }
-    }
-
-    @Override
-    public boolean update(int departmentId, Department updatedDepartment) {
-
-        int position = findPositionById(departmentId);
-
-        if(position == -1) {
-            return false;
-        }
-        else {
-            departments[position].setName(updatedDepartment.getName());
-            return true;
-        }
-    }
-
-    public boolean delete(int departmentId) {
-
-        int position = findPositionById(departmentId);
-
-        if (position == -1) {
-            return false;
-        } else {
-            moveToRightFromPosition(position);
-            return true;
-        }
-    }
-
-    public int findFirstEmptyPosition() {
+        generateDepartments(departments);
 
         for(int i = 0; i < maxDepartments; i++) {
-            if (departments[i] == null) {
-                return i;
+            if(departments[i] != null) {
+                arraySize++;
             }
         }
-        return -1;
     }
 
-    public int findPositionById(int departmentId) {
+    @Override
+    public Department create(Department newDepartment) throws Exception {
 
-        for(int i = 0; i < maxDepartments; i++) {
-            if(departments[i] != null && departments[i].getId() == departmentId) {
-                return i;
+        if(checkInsert(arraySize, maxDepartments) && validateDepartment(newDepartment)) {
+            for(Department x : departments) {
+                if(x == null) {
+                    x = newDepartment;
+                    arraySize++;
+                    return read(newDepartment.getId());
+                }
             }
         }
-        return -1;
+
+        return null;
     }
 
-    public int findPositionByName(String departmentName) {
+    @Override
+    public Department read(int departmentId) throws Exception {
 
-        for(int i = 0; i < maxDepartments; i++) {
-            if(departments[i] != null && departments[i].getName().equals(departmentName)) {
-                return i;
+        if(validateDepartmentID(departmentId)) {
+            for (Department x : departments) {
+                if(x.getId() == departmentId) {
+                    return x;
+                }
             }
         }
-        return -1;
+        return null;
+    }
+
+    @Override
+    public Department read(String departmentName) throws Exception {
+
+        if(validateDepartmentName(departmentName)) {
+            for (Department x : departments) {
+                if(x.getName().equals(departmentName)) {
+                    return x;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public Department update(int departmentId, Department updatedDepartment) throws Exception {
+
+        if(validateDepartmentID(departmentId) && validateDepartment(updatedDepartment)) {
+            read(departmentId).updateDepartment(updatedDepartment);
+            return read(departmentId);
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean delete(int departmentId) throws Exception {
+
+        if (validateDepartmentID(departmentId)) {
+            for (int i = 0; i < maxDepartments; i++) {
+                if(departments[i] != null && departments[i].getId() == departmentId) {
+                    moveToRightFromPosition(i);
+                    arraySize--;
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void moveToRightFromPosition(int position) {
@@ -119,19 +102,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     public Department[] getDepartments() {
-        return departments;
-    }
-
-    public void showAll() {
-
-        for(int i = 0; i < maxDepartments; i++) {
-            if(departments[i] != null) {
-                System.out.println(departments[i].getId() + " " + departments[i].getName());
-            }
-        }
-    }
-
-    public int getMaxElements() {
-        return maxDepartments;
+        return Arrays.copyOfRange(departments, 0, arraySize-1);
     }
 }

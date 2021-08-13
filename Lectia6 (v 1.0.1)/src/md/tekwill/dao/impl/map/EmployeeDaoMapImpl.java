@@ -1,114 +1,66 @@
 package md.tekwill.dao.impl.map;
 
 import md.tekwill.dao.idao.EmployeeDao;
-import md.tekwill.domain.Department;
 import md.tekwill.domain.Employee;
-import md.tekwill.generator.MapGenerator;
+
+import static md.tekwill.dao.validator.Validator.*;
+import static md.tekwill.dao.generator.Generator.*;
 
 import java.util.HashMap;
 
 public class EmployeeDaoMapImpl implements EmployeeDao {
 
-    private final static int maxEmployees = 50;
     private static HashMap<Integer, Employee> employees = new HashMap<Integer, Employee>();
 
     static {
-        MapGenerator.generateEmployees(employees);
+        generateEmployees(employees);
     }
 
     @Override
-    public Employee create(Employee employee) {
+    public Employee create(Employee newEmployee) throws Exception {
 
-        int position = findFirstEmptyPosition();
-
-        if(position != -1) {
-            employees.put(employee.getId(), employee);
-            return employee;
+        if(checkInsert(employees.size(), maxEmployees) && validateEmployee(newEmployee)) {
+            employees.put(newEmployee.getId(), newEmployee);
+            return read(newEmployee.getId());
         }
 
         return null;
     }
 
     @Override
-    public Employee read(int employeeId) {
+    public Employee read(int employeeId) throws Exception {
 
-        int position = findPositionById(employeeId);
+        if(validateEmployeeID(employeeId)) {
+            return employees.get(employeeId);
+        }
+        return null;
+    }
 
-        if(position != -1) {
-            for (Employee x : employees.values()) {
-                if (x.getId() == employeeId) {
-                    return x;
-                }
-            }
+    @Override
+    public Employee update(int employeeId, Employee updatedEmployee) throws Exception {
+
+        if(validateEmployeeID(employeeId) && validateEmployee(updatedEmployee)) {
+            read(employeeId).updateEmployee(updatedEmployee);
+            return read(employeeId);
         }
 
         return null;
     }
 
     @Override
-    public boolean update(int employeeId, Employee updatedEmployee) {
+    public boolean delete(int employeeId) throws Exception {
 
-        int position = findPositionById(employeeId);
-
-        if(position == -1) {
-            return false;
-        }
-        else {
-            employees.get(employeeId).setFirstName(updatedEmployee.getFirstName());
-            employees.get(employeeId).setLastName(updatedEmployee.getLastName());
-            employees.get(employeeId).setDepartment(updatedEmployee.getDepartment());
-            return true;
-        }
-    }
-
-    @Override
-    public boolean delete(int employeeId) {
-
-        int position = findPositionById(employeeId);
-
-        if (position == -1) {
-            return false;
-        } else {
-            employees.remove(employeeId);
-            return true;
-        }
-    }
-
-
-    @Override
-    public int findFirstEmptyPosition() {
-
-        return employees.size() < maxEmployees ? employees.size() : -1;
-    }
-
-    @Override
-    public int findPositionById(int employeeId) {
-
-        for(Employee x : employees.values()) {
-            if (x.getId() == employeeId) {
-                return -2;
+        if (validateEmployeeID(employeeId)) {
+            if(read(employeeId) != null) {
+                employees.remove(employeeId);
+                return true;
             }
         }
-
-        return -1;
+        return false;
     }
 
-    @Override
     public Employee[] getEmployees() {
 
-        int i = 0;
-        Employee[] tmp = new Employee[employees.size()];
-
-        for(Employee x : employees.values()) {
-            tmp[i++] = x;
-        }
-
-        return tmp;
-    }
-
-    @Override
-    public int getMaxElements() {
-
-        return maxEmployees;
+        return employees.values().toArray(new Employee[0]);
     }
 }

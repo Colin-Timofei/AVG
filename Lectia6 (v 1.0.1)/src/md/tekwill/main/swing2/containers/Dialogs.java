@@ -1,5 +1,8 @@
 package md.tekwill.main.swing2.containers;
 
+import md.tekwill.domain.DepartmentResponse;
+import md.tekwill.domain.EmployeeResponse;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -51,29 +54,29 @@ public class Dialogs {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        String[] element = dsi.read(Integer.parseInt(departmentTable.getModel().getValueAt(row, 0).toString()));
+        DepartmentResponse element = dsi.read(Integer.parseInt(departmentTable.getModel().getValueAt(row, 0).toString()));
 
         JLabel errorLabel = createBigLabel("");
 
-        if (Boolean.parseBoolean(element[0])) {
+        if (element.status) {
 
-            int id = Integer.parseInt(element[1]);
+            int id = element.department.getId();
             JLabel IdLabel = createMediumLabel("ID : ");
             panel.add(IdLabel);
 
-            JTextField IdTextField = createDisabledTextField(element[1]);
+            JTextField IdTextField = createDisabledTextField(String.valueOf(id));
             panel.add(IdTextField);
 
             JLabel departmentLabel = createMediumLabel("Department : ");
             panel.add(departmentLabel);
 
-            JTextField departmentTextField = createEnabledTextField(element[2]);
+            JTextField departmentTextField = createEnabledTextField(element.department.getName());
             panel.add(departmentTextField);
 
             updateBlock(panel, cancelButtonListener(tmp), deleteDepartmentButtonListener(id, tmp), updateDepartmentButtonListener(id, departmentTextField, errorLabel));
 
         } else {
-            errorLabel.setText(element[1]);
+            errorLabel.setText(element.errorMessage);
         }
 
         panel.add(errorLabel);
@@ -130,43 +133,43 @@ public class Dialogs {
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());
 
-        String[] element = esi.read(Integer.parseInt(employeeTable.getModel().getValueAt(row, 0).toString()));
+        EmployeeResponse element = esi.read(Integer.parseInt(employeeTable.getModel().getValueAt(row, 0).toString()));
 
         JLabel errorLabel = createBigLabel("");
 
-        if (Boolean.parseBoolean(element[0])) {
+        if (element.status) {
 
             JLabel IdLabel = createMediumLabel("ID : ");
             panel.add(IdLabel);
 
-            int id = Integer.parseInt(element[1]);
-            JTextField IdTextField = createDisabledTextField(element[1]);
+            int id = element.employee.getId();
+            JTextField IdTextField = createDisabledTextField(String.valueOf(id));
             panel.add(IdTextField);
 
             JLabel firstNameLabel = createMediumLabel("First Name : ");
             panel.add(firstNameLabel);
 
-            JTextField firstNameTextField = createEnabledTextField(element[2]);
+            JTextField firstNameTextField = createEnabledTextField(element.employee.getFirstName());
             panel.add(firstNameTextField);
 
             JLabel lastNameLabel = createMediumLabel("Last Name : ");
             panel.add(lastNameLabel);
 
-            JTextField lastNameTextField = createEnabledTextField(element[3]);
+            JTextField lastNameTextField = createEnabledTextField(element.employee.getLastName());
             panel.add(lastNameTextField);
 
             JLabel departmentLabel = createMediumLabel("Department : ");
             panel.add(departmentLabel);
 
             JComboBox departmentComboBox = createComboBox(departments);
-            departmentComboBox.setSelectedItem(element[4]);
+            departmentComboBox.setSelectedItem(element.employee.getDepartment().getName());
             panel.add(departmentComboBox);
 
             updateBlock(panel, cancelButtonListener(tmp), deleteEmployeeButtonListener(id, tmp), updateEmployeeButtonListener(id, firstNameTextField, lastNameTextField, departmentComboBox, errorLabel));
 
 
         } else {
-        errorLabel.setText(element[1]);
+        errorLabel.setText(element.errorMessage);
     }
 
         panel.add(errorLabel);
