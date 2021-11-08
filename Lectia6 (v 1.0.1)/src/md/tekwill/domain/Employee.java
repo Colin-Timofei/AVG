@@ -21,17 +21,12 @@ public class Employee {
         lastUpdated = createdAt;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-        lastUpdated = LocalDateTime.now();
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -40,7 +35,6 @@ public class Employee {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
-        lastUpdated = LocalDateTime.now();
     }
 
     public String getLastName() {
@@ -49,23 +43,30 @@ public class Employee {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-        lastUpdated = LocalDateTime.now();
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDateTime getLastUpdated() {
         return lastUpdated;
     }
 
-    public void updateEmployee(Employee employee) {
-
-        firstName = employee.getFirstName();
-        lastName = employee.getLastName();
-        department.setName(employee.getDepartment().getName());
-        lastUpdated = LocalDateTime.now();
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     @Override

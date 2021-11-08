@@ -3,8 +3,8 @@ package md.tekwill.dao.impl.arraylist;
 import md.tekwill.dao.idao.EmployeeDao;
 import md.tekwill.domain.Employee;
 
-import static md.tekwill.dao.validator.Validator.*;
-import static md.tekwill.dao.generator.Generator.*;
+import static md.tekwill.dao.helper.validator.Validator.*;
+import static md.tekwill.dao.helper.generator.Generator.*;
 
 import java.util.ArrayList;
 
@@ -44,7 +44,7 @@ public class EmployeeDaoALImpl implements EmployeeDao {
     public Employee update(int employeeId, Employee updatedEmployee) throws Exception {
 
         if(validateEmployeeID(employeeId) && validateEmployee(updatedEmployee)) {
-            read(employeeId).updateEmployee(updatedEmployee);
+//            read(employeeId).updateEmployee(updatedEmployee);
             return read(employeeId);
         }
 

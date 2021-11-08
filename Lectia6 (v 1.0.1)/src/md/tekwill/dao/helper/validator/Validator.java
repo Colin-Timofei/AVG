@@ -1,4 +1,4 @@
-package md.tekwill.dao.validator;
+package md.tekwill.dao.helper.validator;
 
 import md.tekwill.domain.Department;
 import md.tekwill.domain.Employee;

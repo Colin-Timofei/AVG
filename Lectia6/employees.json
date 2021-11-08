@@ -1,0 +1,42 @@
+[
+  {
+	"employee": {
+	  "firstname": "Ion",
+	  "created": "25-Aug-2021 14:10:07",
+	  "id": 0,
+	  "department": "IT",
+	  "updated": "25-Aug-2021 14:10:07",
+	  "lastname": "Bostan"
+	}
+  },
+  {
+	"employee": {
+	  "firstname": "Dima",
+	  "created": "25-Aug-2021 14:10:07",
+	  "id": 1,
+	  "department": "IT",
+	  "updated": "25-Aug-2021 14:10:07",
+	  "lastname": "Caruta"
+	}
+  },
+  {
+	"employee": {
+	  "firstname": "Ana",
+	  "created": "25-Aug-2021 14:10:07",
+	  "id": 2,
+	  "department": "HR",
+	  "updated": "25-Aug-2021 14:10:07",
+	  "lastname": "Tulceac"
+	}
+  },
+  {
+	"employee": {
+	  "firstname": "Dina",
+	  "created": "25-Aug-2021 14:10:07",
+	  "id": 3,
+	  "department": "HQ",
+	  "updated": "25-Aug-2021 14:10:07",
+	  "lastname": "Fritz"
+	}
+  }
+]

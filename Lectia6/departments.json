@@ -1,0 +1,34 @@
+[
+  {
+	"department": {
+	  "created": "25-Aug-2021 14:10:38",
+	  "name": "IT",
+	  "id": 0,
+	  "updated": "25-Aug-2021 14:10:38"
+	}
+  },
+  {
+	"department": {
+	  "created": "25-Aug-2021 14:10:38",
+	  "name": "Management",
+	  "id": 1,
+	  "updated": "25-Aug-2021 14:10:38"
+	}
+  },
+  {
+	"department": {
+	  "created": "25-Aug-2021 14:10:38",
+	  "name": "HQ",
+	  "id": 2,
+	  "updated": "25-Aug-2021 14:10:38"
+	}
+  },
+  {
+	"department": {
+	  "created": "25-Aug-2021 14:10:38",
+	  "name": "HR",
+	  "id": 3,
+	  "updated": "25-Aug-2021 14:10:38"
+	}
+  }
+]

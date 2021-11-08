@@ -1,4 +1,4 @@
-package md.tekwill.dao.generator;
+package md.tekwill.dao.helper.generator;
 
 import md.tekwill.domain.Department;
 import md.tekwill.domain.Employee;

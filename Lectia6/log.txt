@@ -1,0 +1,232 @@
+Log added on : 25-Aug-2021 17:30:52
+-----------------------------------
+
+Departments
+-----------
+
+ID : 0
+Name : IT
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 1
+Name : Management
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 2
+Name : HQ
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 3
+Name : HR
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+Employees
+---------
+
+ID : 0
+First name : Ion
+Last name : Bostan
+Department : IT
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 1
+First name : Dima
+Last name : Caruta
+Department : IT
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 2
+First name : Ana
+Last name : Tulceac
+Department : HR
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 3
+First name : Dina
+Last name : Fritz
+Department : HQ
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+
+Log added on : 25-Aug-2021 17:30:57
+-----------------------------------
+
+Departments
+-----------
+
+ID : 0
+Name : IT
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 1
+Name : Management
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 2
+Name : HQ
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 3
+Name : HR
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+Employees
+---------
+
+ID : 0
+First name : Ion
+Last name : Bostan
+Department : IT
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 1
+First name : Dima
+Last name : Caruta
+Department : IT
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 2
+First name : Ana
+Last name : Tulceac
+Department : HR
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 3
+First name : Dina
+Last name : Fritz
+Department : HQ
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+
+Log added on : 11-Sep-2021 18:07:26
+-----------------------------------
+
+Departments
+-----------
+
+ID : 0
+Name : IT
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 1
+Name : Management
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 2
+Name : HQ
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 3
+Name : HR
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+Employees
+---------
+
+ID : 0
+First name : Ion
+Last name : Bostan
+Department : IT
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 1
+First name : Dima
+Last name : Caruta
+Department : IT
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 2
+First name : Ana
+Last name : Tulceac
+Department : HR
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 3
+First name : Dina
+Last name : Fritz
+Department : HQ
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+
+Log added on : 11-Sep-2021 18:10:22
+-----------------------------------
+
+Departments
+-----------
+
+ID : 0
+Name : IT
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 1
+Name : Management
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 2
+Name : HQ
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+ID : 3
+Name : HR
+Created : 25-Aug-2021 14:10:38
+Updated : 25-Aug-2021 14:10:38
+
+Employees
+---------
+
+ID : 0
+First name : Ion
+Last name : Bostan
+Department : IT
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 1
+First name : Dima
+Last name : Caruta
+Department : IT
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 2
+First name : Ana
+Last name : Tulceac
+Department : HR
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+ID : 3
+First name : Dina
+Last name : Fritz
+Department : HQ
+Created : 25-Aug-2021 14:10:07
+Updated : 25-Aug-2021 14:10:07
+
+

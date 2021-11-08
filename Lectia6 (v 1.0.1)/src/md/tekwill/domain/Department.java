@@ -10,9 +10,9 @@ public class Department {
 
     private static int departmentCounter;
 
-    public Department(String name) {
-        this.id = departmentCounter++;
-        this.name = name;
+    public Department(String departmentName) {
+        id = departmentCounter++;
+        name = departmentName;
         createdAt = LocalDateTime.now();
         lastUpdated = createdAt;
     }
@@ -21,26 +21,32 @@ public class Department {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-        lastUpdated = LocalDateTime.now();
     }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public LocalDateTime getLastUpdated() {
         return lastUpdated;
     }
 
-    public void updateDepartment(Department department) {
-        name = department.getName();
-        lastUpdated = LocalDateTime.now();
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
 
     @Override

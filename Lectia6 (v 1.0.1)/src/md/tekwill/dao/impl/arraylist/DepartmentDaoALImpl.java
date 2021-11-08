@@ -3,8 +3,8 @@ package md.tekwill.dao.impl.arraylist;
 import md.tekwill.dao.idao.DepartmentDao;
 import md.tekwill.domain.Department;
 
-import static md.tekwill.dao.validator.Validator.*;
-import static md.tekwill.dao.generator.Generator.*;
+import static md.tekwill.dao.helper.validator.Validator.*;
+import static md.tekwill.dao.helper.generator.Generator.*;
 
 import java.util.ArrayList;
 
@@ -57,7 +57,7 @@ public class DepartmentDaoALImpl implements DepartmentDao {
     public Department update(int departmentId, Department updatedDepartment) throws Exception {
 
         if(validateDepartmentID(departmentId) && validateDepartment(updatedDepartment)) {
-            read(departmentId).updateDepartment(updatedDepartment);
+//            read(departmentId).updateDepartment(updatedDepartment);
             return read(departmentId);
         }
 

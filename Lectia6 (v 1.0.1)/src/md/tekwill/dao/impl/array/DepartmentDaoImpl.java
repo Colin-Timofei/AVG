@@ -5,8 +5,8 @@ import md.tekwill.domain.Department;
 
 import java.util.Arrays;
 
-import static md.tekwill.dao.validator.Validator.*;
-import static md.tekwill.dao.generator.Generator.*;
+import static md.tekwill.dao.helper.validator.Validator.*;
+import static md.tekwill.dao.helper.generator.Generator.*;
 
 
 public class DepartmentDaoImpl implements DepartmentDao {
@@ -70,7 +70,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     public Department update(int departmentId, Department updatedDepartment) throws Exception {
 
         if(validateDepartmentID(departmentId) && validateDepartment(updatedDepartment)) {
-            read(departmentId).updateDepartment(updatedDepartment);
+            read(departmentId).setName(updatedDepartment.getName());
             return read(departmentId);
         }
 
